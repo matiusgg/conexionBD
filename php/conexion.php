@@ -30,6 +30,35 @@ if($conexion->connect_error) {
 
 }
 
+
+
+// ACTUALIZACION 3: AHORA LO QUE QUEREMOS HACER ES MEDIANTE LOS INPUTS, LOS DATOS QUE NOS INTRODUZCAN SE INSERTEN EN LA BASE DE DATOS.
+// ESTO MEDIANTE OBVIAMENTE el form u otro que nos permita enviar la informacion, ya que como te imaginaras no es optimizable hacer cada vez una peticion de INSERT INTO por cada tupla, nos llenaria demasiado codigo.
+
+// // INSERTAR NUEVAS TUPLAS
+// // DENTRO DEL QUERY VAMOS A PONER INSERT INTO, OBVIAMENTE. RECORDEMOS DENTRO DEL QUERY ES DONDE LE DAMOS PETICIONES
+
+$nombreBD = $_POST['nombre'];
+$apellidosBD = $_POST['apellidos'];
+$movilBD = $_POST['movil'];
+
+// comprobacion de los $_POST
+
+echo $nombreBD, $apellidosBD, $movilBD;
+// RECORDEMOS QUE LA "" EN MYSQL SON STRINGS POR ESO NO TE CONFUNDAS PORQUE AQUI LAS "" EN EL QUERY SON DEL MYSQL MAS NO DEL PHP.
+$insertar = $conexion->query(' 
+INSERT INTO clientes (nombre, apellidos, movil) VALUE ("' . $nombreBD . '", "' . $apellidosBD . '", ' . $movilBD . ') ');
+
+// // AHORA CUANDO REFRESQUEMOS, NOS LO MOSTRARA LA TUPLA CREADA, PARA DESPUES DARLE REFRESCAR EN MYPHPADMIN PARA QUE NOS APAREZCA.
+
+
+// //  MOSTRAR DATOS DE LA TABLA QUE CREAMOS EN MYPHPADMIN
+
+// // RESULTADOS: VA A SER LA VARIABLE QUIE NOS SACARA LOS DATOS. COMO CONEXION ES UN OBJETO PODEMOS PEDIRLE COSAS
+// // UNA DE LAS OPCIONES MAS UTILIZADAS ES USAR EL METODO 'QUERY' QUE NOS PERMITE DARLE ORDENES A LA BASE DE DATOS CON SELECT
+
+
+
 $resultados = $conexion->query('select * from clientes');
 
 // CREAMO SUN FOREACH PARA QUE $resultados, para uqe nos muestre los datos de la base de datos, en este caso dentro de [nosmbre de atributo].
